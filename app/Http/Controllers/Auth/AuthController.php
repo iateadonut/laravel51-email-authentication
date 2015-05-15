@@ -72,7 +72,6 @@ class AuthController extends Controller {
 			);
 			
 			\Mail::queue('emails.activateAccount', $data, function($message) use ($user) {
-				$message->from('thestudymachine@gmail.com');
 				$message->subject('Please activate your account.');
 				$message->to($user->email);
 			});
