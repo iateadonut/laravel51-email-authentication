@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+//Route::get('/', 'WelcomeController@index');
+Route::get('/', function() {
+	return redirect('/auth/login');
+});
+
 
 Route::get('home', 'HomeController@index');
 
@@ -19,3 +23,5 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('activate/{code}', 'Auth\AuthController@activateAccount');

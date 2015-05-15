@@ -32,6 +32,12 @@ class Authenticate {
 	 */
 	public function handle($request, Closure $next)
 	{
+
+		if (!\Auth::user()->active) {
+			\Session::flash('message', 'Please activate your account to proceed.');
+			return redirect()->guest('home');
+		}
+		
 		if ($this->auth->guest())
 		{
 			if ($request->ajax())
@@ -46,5 +52,8 @@ class Authenticate {
 
 		return $next($request);
 	}
+	
+
+	
 
 }
