@@ -8,7 +8,9 @@
 				<div class="panel-heading">{{ Lang::get('titles.home') }}</div>
 
 				<div class="panel-body">
-					{{ Lang::get('auth.loggedIn') }}
+					<p>{{ Lang::get('auth.tooManyEmails',
+						['email' => $email] ) }}</p>
+
 				</div>
 			</div>
 		</div>

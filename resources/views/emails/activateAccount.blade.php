@@ -1,4 +1,4 @@
-Click here to ativate your account: 
+{{ Lang::get('auth.clickHereActivate') }}
 <a href="{{ url('activate/'.$code) }}" >
 {{ url('activate/') }}
 </a>

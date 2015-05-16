@@ -17,6 +17,7 @@ class UpdateUsersTable extends Migration {
 			$table->string('activation_code')->after('password');
 			$table->boolean('active')
 				->default(0)->after('activation_code');
+			$table->tinyInteger('resent')->unsigned()->after('active');
 		});
 	}
 
@@ -31,6 +32,7 @@ class UpdateUsersTable extends Migration {
 		{
 			$table->dropColumn('activation_code');
 			$table->dropColumn('active');
+			$table->dropColumn('resent');
 		});
 	}
 

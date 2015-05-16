@@ -8,7 +8,11 @@
 				<div class="panel-heading">{{ Lang::get('titles.home') }}</div>
 
 				<div class="panel-body">
-					{{ Lang::get('auth.loggedIn') }}
+					<p>An email was sent to {{ $email }} on {{ $date }}.</p>
+
+					<p>{{ Lang::get('auth.clickInEmail') }}</p>
+					
+					<p><a href='/resendEmail'>{{ Lang::get('auth.clickHereResend') }}</a></p>
 				</div>
 			</div>
 		</div>

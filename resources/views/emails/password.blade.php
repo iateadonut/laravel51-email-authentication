@@ -1,1 +1,4 @@
-Click here to reset your password: {{ url('password/reset/'.$token) }}
+{{ Lang::get('auth.clickHereReset') }}
+<a href="{{ url('password/reset/'.$token) }}" >
+{{ url('password/reset/') }}
+</a>
