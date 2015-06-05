@@ -1,13 +1,12 @@
 <?php namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades;
+use Validator;
 
 class AuthController extends Controller {
 
@@ -31,16 +30,29 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
 	 * @return void
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct()
 	{
-		$this->auth = $auth;
-		$this->registrar = $registrar;
 
 		$this->middleware('guest',
 			['except' =>
 				['getLogout', 'resendEmail', 'activateAccount']]);
 	}
 
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array  $data
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */	
+	public function validator(array $data)
+	{
+		return Validator::make($data, [
+				'name' => 'required|max:255',
+				'email' => 'required|email|max:255|unique:users',
+				'password' => 'required|confirmed|min:6',
+				]);
+	}	
+	
 	/**
 	 * Handle a registration request for the application.
 	 *
@@ -50,14 +62,13 @@ class AuthController extends Controller {
 	public function postRegister(Request $request)
 	{
 
-		$validator = $this->registrar->validator($request->all());
-	
-		if ($validator->fails())
-		{
-			$this->throwValidationException(
-					$request, $validator
-			);
-		}
+		$validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
 
 		$activation_code = str_random(60) . $request->input('email');
 		$user = new User;
@@ -81,6 +92,7 @@ class AuthController extends Controller {
 		}
 		
 	}
+	//*/
 	
 	public function sendEmail(User $user)
 	{
