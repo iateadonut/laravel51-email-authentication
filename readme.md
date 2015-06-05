@@ -1,6 +1,7 @@
-## Laravel5 email authentication
+## Laravel5.1 email authentication
 
-This is an implementation of the work of Luca Bernardino at codeanchor.net.
+This is an implementation of the work of Luca Bernardino at codeanchor.net,
+originally created in laravel 5.0, then upgraded to laravel 5.1 LTS.
 
 There are a few changes, including the refactoring he talks about for
  AuthenticatesAndRegistersUsers.php, in this tutorial:
